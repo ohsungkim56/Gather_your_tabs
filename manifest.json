@@ -1,0 +1,11 @@
+{
+  "name": "Gather your tabs",
+  "description": "Gather your tabs to a window",
+  "version": "0.1",
+  "permissions": ["tabs"],
+  "action": {
+    "default_title": "Open",
+	"default_popup": "popup.html"
+  },
+  "manifest_version": 3
+}
