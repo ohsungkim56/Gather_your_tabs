@@ -31,16 +31,8 @@ async function move_tabs_to_new_window(){
 	}
 	
 	if(targetTabs.length > 0){
-		
-		await console.log("lastAccessed");
-		await console.log(targetTabs[0].lastAccessed);
-		
 		if(await get_chrome_major_version() >= 121){
-			await console.log("before sort");
-			await console.log(targetTabs);
 			await targetTabs.sort(tab_comparator); // sort targetTabs
-			await console.log("after sort");
-			await console.log(targetTabs);
 		}
 		
 		await chrome.windows.create({}, (w)=>{
@@ -53,8 +45,29 @@ async function move_tabs_to_new_window(){
 	}
 }
 
+const enterEventHandler = function (event){
+	if (event.key === "Enter") {
+		document
+		.getElementById('move_tabs_to_new_window_button')
+		.click();
+	}
+};
+
 window.addEventListener("load", ev => {
     document
 		.getElementById('move_tabs_to_new_window_button')
 		.addEventListener('click', move_tabs_to_new_window);
+		
+	document
+		.getElementById('move_tabs_to_new_window_button')
+		.addEventListener("keydown", enterEventHandler);
+		
+	document
+		.getElementById('TARGET_URL')
+		.addEventListener("keydown", enterEventHandler);
+		
+	document
+		.getElementById('TARGET_URL')
+		.focus();
+		
 });
